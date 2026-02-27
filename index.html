@@ -3,7 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Etiquetas para la MINIATURA (Open Graph) -->
     <title>Rinconcito Urbano - Balvanera</title>
+    <meta name="description" content="Alquiler temporal en el corazón de Balvanera. Seguridad, confort y ubicación estratégica.">
+    
+    <!-- Facebook / WhatsApp / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://santiagosaccoccia1982-crypto.github.io/Rinconcito-Urbano/">
+    <meta property="og:title" content="Rinconcito Urbano - Balvanera">
+    <meta property="og:description" content="Tu lugar en Buenos Aires. Confort, seguridad y cercanía a todo.">
+    <!-- Imagen de miniatura: Usamos una imagen de interiores acogedora -->
+    <meta property="og:image" content="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=1000&auto=format&fit=crop">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Rinconcito Urbano - Balvanera">
+    <meta property="twitter:description" content="Alquiler temporal en CABA. Mitre 3218.">
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=1000&auto=format&fit=crop">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -89,7 +107,7 @@
         
         <!-- Botones Principales -->
         <div class="space-y-2">
-            <a href="https://wa.me/5492914046014" class="btn-main bg-emerald-600 text-white shadow-lg active:scale-95 transition-transform">
+            <a href="https://wa.me/5492914046014" target="_blank" class="btn-main bg-emerald-600 text-white shadow-lg active:scale-95 transition-transform">
                 <div class="flex items-center">
                     <i class="fab fa-whatsapp text-2xl mr-4"></i>
                     <div><p class="text-md leading-tight">Consultar Santiago</p><p class="text-[9px] opacity-70 uppercase font-black">Dueño Directo</p></div>
@@ -97,17 +115,16 @@
                 <i class="fas fa-chevron-right opacity-30"></i>
             </a>
             <div class="grid grid-cols-2 gap-2">
-                <a href="https://photos.app.goo.gl/T6fEY8cKsD5eUvY1A" class="btn-main bg-white text-slate-700 border border-slate-200 p-3">
+                <a href="https://photos.app.goo.gl/T6fEY8cKsD5eUvY1A" target="_blank" class="btn-main bg-white text-slate-700 border border-slate-200 p-3">
                     <i class="fas fa-camera text-blue-600 mr-2"></i> <span class="text-xs">Fotos</span>
                 </a>
-                <!-- Link actualizado al My Maps proporcionado -->
-                <a href="https://www.google.com/maps/d/u/0/viewer?mid=1FWLID2GQQ1h2_5KIOtxWn_OahpjcI7U" class="btn-main bg-slate-800 text-white p-3">
+                <a href="https://www.google.com/maps/d/viewer?mid=1FWLID2GQQ1h2_5KIOtxWn_OahpjcI7U" target="_blank" class="btn-main bg-slate-800 text-white p-3">
                     <i class="fas fa-map-marker-alt text-amber-400 mr-2"></i> <span class="text-xs">Mapa</span>
                 </a>
             </div>
         </div>
 
-        <!-- SERVICIOS "A LA VUELTA" -->
+        <!-- SECCIONES DE CONTENIDO -->
         <section class="glass-card p-5 shadow-sm border-l-4 border-l-amber-400">
             <div class="category-header"><i class="fas fa-walking"></i> Comodidad a la vuelta</div>
             <div class="grid grid-cols-1 gap-2">
@@ -123,95 +140,16 @@
             </div>
         </section>
 
-        <!-- GASTRONOMÍA Y RECREACIÓN -->
-        <section class="glass-card p-5 shadow-sm">
-            <div class="category-header"><i class="fas fa-utensils"></i> Gastronomía e Historia</div>
-            <div class="grid grid-cols-1 gap-3">
-                <div class="location-item">
-                    <span class="location-name">Panadería Flores Porteñas</span>
-                    <span class="location-dist">Histórica</span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name">Café de los Angelitos</span>
-                    <span class="location-dist">Icono Tango</span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name">Congreso de la Nación</span>
-                    <span class="location-dist">Cerca</span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name"><i class="fas fa-monument text-amber-600 mr-2"></i>Obelisco de Bs. As.</span>
-                    <span class="location-dist">12 min</span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name">Parque de la Estación</span>
-                    <span class="location-dist">60m</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- TRANSPORTE Y MOVILIDAD -->
+        <!-- TRANSPORTE -->
         <section class="bg-blue-900 p-6 rounded-[2rem] text-white shadow-xl">
             <div class="category-header border-blue-800 text-blue-300"><i class="fas fa-bus"></i> Movilidad Total</div>
-            
-            <div class="space-y-4 mb-6">
+            <div class="space-y-4">
                 <div class="flex items-center justify-between bg-blue-950/40 p-3 rounded-xl border border-blue-800">
                     <span class="text-xs font-bold"><i class="fas fa-bus-alt mr-2 text-sky-400"></i>+20 Líneas de Colectivo</span>
-                    <span class="text-[10px] font-black bg-sky-500/20 px-2 py-1 rounded">A 300m</span>
                 </div>
                 <div class="flex items-center justify-between bg-blue-950/40 p-3 rounded-xl border border-blue-800">
-                    <span class="text-xs font-bold"><i class="fas fa-exchange-alt mr-2 text-amber-400"></i>Directo a Estación Retiro</span>
-                    <span class="text-[10px] font-black bg-amber-500/20 px-2 py-1 rounded text-amber-300">Puerta a Puerta</span>
+                    <span class="text-xs font-bold"><i class="fas fa-subway mr-2 text-amber-400"></i>Subtes A, H y B</span>
                 </div>
-                <div class="flex items-center justify-between bg-blue-950/40 p-3 rounded-xl border border-blue-800">
-                    <span class="text-xs font-bold"><i class="fas fa-bicycle mr-2 text-emerald-400"></i>Estación Eco-Bici</span>
-                    <span class="text-[10px] font-black bg-emerald-500/20 px-2 py-1 rounded text-emerald-300">A 50m</span>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-2">
-                <div class="bg-blue-950/60 p-3 rounded-xl border border-blue-700 text-center">
-                    <p class="text-sky-400 font-black text-sm">Subte A-H-B</p>
-                    <p class="text-[8px] uppercase opacity-50">Conexión Rápida</p>
-                </div>
-                <div class="bg-blue-950/60 p-3 rounded-xl border border-blue-700 text-center">
-                    <p class="text-white font-black text-sm">Tren Once</p>
-                    <p class="text-[8px] uppercase opacity-50">Sarmiento</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- EDUCACIÓN -->
-        <section class="glass-card p-5 shadow-sm">
-            <div class="category-header"><i class="fas fa-university"></i> Universidades</div>
-            <div class="grid grid-cols-1 gap-y-3">
-                <div class="location-item">
-                    <span class="location-name">Facultad Psicología UBA</span>
-                    <span class="location-dist">250m</span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name">Universidad Kennedy</span>
-                    <span class="location-dist">Cerca</span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name">Universidad de Palermo</span>
-                    <span class="location-dist">Acceso Directo</span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name">UCES</span>
-                    <span class="location-dist">Zona</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- SALUD -->
-        <section class="glass-card p-5 shadow-sm">
-            <div class="category-header"><i class="fas fa-h-square"></i> Salud Cercana</div>
-            <div class="grid grid-cols-2 gap-x-4 gap-y-2">
-                <div class="location-item"><span class="location-name">Hosp. Ramos Mejía</span></div>
-                <div class="location-item"><span class="location-name">Sanatorio Méndez</span></div>
-                <div class="location-item"><span class="location-name">Sanatorio Güemes</span></div>
-                <div class="location-item"><span class="location-name">Hosp. Italiano</span></div>
             </div>
         </section>
 
@@ -221,5 +159,4 @@
     </main>
 
 </body>
-
 </html>
