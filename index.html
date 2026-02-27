@@ -4,31 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Etiquetas para la MINIATURA (Open Graph) -->
+    <!-- CONFIGURACIÓN DE MINIATURA (Open Graph) -->
     <title>Rinconcito Urbano - Balvanera</title>
-    <meta name="description" content="Alquiler temporal en el corazón de Balvanera. Seguridad, confort y ubicación estratégica.">
+    <meta name="description" content="Alquiler temporal en CABA. Mitre 3218. Comodidad y seguridad.">
     
-    <!-- Facebook / WhatsApp / LinkedIn -->
+    <!-- Estas etiquetas son las que lee WhatsApp -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://santiagosaccoccia1982-crypto.github.io/Rinconcito-Urbano/">
     <meta property="og:title" content="Rinconcito Urbano - Balvanera">
-    <meta property="og:description" content="Tu lugar en Buenos Aires. Confort, seguridad y cercanía a todo.">
-    <!-- Imagen de miniatura: Usamos una imagen de interiores acogedora -->
-    <meta property="og:image" content="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=1000&auto=format&fit=crop">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="Rinconcito Urbano - Balvanera">
-    <meta property="twitter:description" content="Alquiler temporal en CABA. Mitre 3218.">
-    <meta property="twitter:image" content="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=1000&auto=format&fit=crop">
+    <meta property="og:description" content="Tu lugar en Buenos Aires. Mitre 3218. ¡Consultanos!">
+    
+    <!-- Link de imagen directo y público (IMPORTANTE) -->
+    <meta property="og:image" content="https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1200&h=630&fit=crop">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/jpeg">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Charm:wght@700&display=swap');
-        
         body { font-family: 'Montserrat', sans-serif; background-color: #f8fafc; }
-        
         .header-filete {
             background: #1e3a8a;
             background: radial-gradient(circle at center, #1e40af 0%, #172554 100%);
@@ -41,15 +37,6 @@
             box-shadow: 0 4px 25px rgba(0,0,0,0.4);
             overflow: hidden;
         }
-
-        .filete-svg {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
         .text-balvanera {
             font-family: 'Charm', cursive;
             color: #fbbf24;
@@ -58,7 +45,6 @@
             text-shadow: 3px 3px 0px #0c1a44, 0px 0px 20px rgba(0,0,0,0.6);
             z-index: 10;
         }
-
         .brand-ribbon {
             background: #fbbf24;
             color: #1e3a8a;
@@ -73,29 +59,14 @@
             z-index: 10;
             display: inline-block;
         }
-
         .glass-card { background: white; border-radius: 2rem; border: 1px solid #e2e8f0; }
         .category-header { font-size: 0.75rem; font-weight: 900; color: #1e40af; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem; margin-bottom: 1rem; display: flex; align-items: center; }
-        .category-header i { margin-right: 0.6rem; color: #fbbf24; }
-        
-        .location-item { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem; }
-        .location-name { font-size: 0.8rem; font-weight: 700; color: #334155; line-height: 1.2; }
-        .location-dist { font-size: 0.65rem; font-weight: 800; color: #1e40af; background: #eff6ff; padding: 2px 6px; border-radius: 4px; white-space: nowrap; margin-left: 8px; }
-        
-        .badge-nearby { font-size: 0.6rem; font-weight: 900; color: #ffffff; background: #ef4444; padding: 1px 5px; border-radius: 3px; text-transform: uppercase; margin-left: 5px; vertical-align: middle; }
-
         .btn-main { border-radius: 1.25rem; padding: 1.1rem; font-weight: 800; display: flex; align-items: center; justify-content: space-between; }
     </style>
 </head>
 <body class="antialiased text-slate-900">
 
     <header class="header-filete">
-        <svg class="filete-svg" viewBox="0 0 400 300" preserveAspectRatio="none">
-            <path d="M20,60 Q20,20 80,20" fill="none" stroke="#fbbf24" stroke-width="3" opacity="0.8"/>
-            <path d="M380,60 Q380,20 320,20" fill="none" stroke="#fbbf24" stroke-width="3" opacity="0.8"/>
-            <path d="M20,240 C20,280 80,280 120,260" fill="none" stroke="#fbbf24" stroke-width="2" opacity="0.5"/>
-            <path d="M380,240 C380,280 320,280 280,260" fill="none" stroke="#fbbf24" stroke-width="2" opacity="0.5"/>
-        </svg>
         <div class="text-center">
             <h1 class="text-balvanera">Balvanera</h1>
             <div class="brand-ribbon">Rinconcito Urbano</div>
@@ -105,7 +76,6 @@
 
     <main class="max-w-md mx-auto px-5 -mt-8 relative z-20 space-y-4 pb-20">
         
-        <!-- Botones Principales -->
         <div class="space-y-2">
             <a href="https://wa.me/5492914046014" target="_blank" class="btn-main bg-emerald-600 text-white shadow-lg active:scale-95 transition-transform">
                 <div class="flex items-center">
@@ -124,37 +94,13 @@
             </div>
         </div>
 
-        <!-- SECCIONES DE CONTENIDO -->
         <section class="glass-card p-5 shadow-sm border-l-4 border-l-amber-400">
             <div class="category-header"><i class="fas fa-walking"></i> Comodidad a la vuelta</div>
-            <div class="grid grid-cols-1 gap-2">
-                <div class="location-item">
-                    <span class="location-name"><i class="fas fa-shopping-cart text-blue-500 mr-2"></i>Carrefour 24hs <span class="badge-nearby">A la vuelta</span></span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name"><i class="fas fa-gas-pump text-slate-400 mr-2"></i>YPF / Axion <span class="badge-nearby">A la vuelta</span></span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name"><i class="fas fa-car text-indigo-500 mr-2"></i>Cocheras Comerciales <span class="badge-nearby">En la zona</span></span>
-                </div>
-            </div>
-        </section>
-
-        <!-- TRANSPORTE -->
-        <section class="bg-blue-900 p-6 rounded-[2rem] text-white shadow-xl">
-            <div class="category-header border-blue-800 text-blue-300"><i class="fas fa-bus"></i> Movilidad Total</div>
-            <div class="space-y-4">
-                <div class="flex items-center justify-between bg-blue-950/40 p-3 rounded-xl border border-blue-800">
-                    <span class="text-xs font-bold"><i class="fas fa-bus-alt mr-2 text-sky-400"></i>+20 Líneas de Colectivo</span>
-                </div>
-                <div class="flex items-center justify-between bg-blue-950/40 p-3 rounded-xl border border-blue-800">
-                    <span class="text-xs font-bold"><i class="fas fa-subway mr-2 text-amber-400"></i>Subtes A, H y B</span>
-                </div>
-            </div>
+            <p class="text-xs text-slate-600 mb-2">Carrefour 24hs, Cocheras y transporte a metros.</p>
         </section>
 
         <footer class="text-center py-6 opacity-40">
-            <p class="text-[9px] font-black uppercase tracking-[0.4em]">Balvanera • Buenos Aires</p>
+            <p class="text-[9px] font-black uppercase tracking-[0.4em]">Mitre 3218 • Buenos Aires</p>
         </footer>
     </main>
 
