@@ -4,27 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- CONFIGURACIÓN DE MINIATURA (Open Graph) -->
+    <!-- CONFIGURACIÓN DE MINIATURA (Open Graph) - CONSERVADA Y OPTIMIZADA -->
     <title>Rinconcito Urbano - Balvanera</title>
-    <meta name="description" content="Alquiler temporal en CABA. Mitre 3218. Comodidad y seguridad.">
+    <meta name="description" content="Alquiler temporal en CABA. Mitre 3218. Comodidad, seguridad y estilo porteño.">
     
-    <!-- Estas etiquetas son las que lee WhatsApp -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://santiagosaccoccia1982-crypto.github.io/Rinconcito-Urbano/">
     <meta property="og:title" content="Rinconcito Urbano - Balvanera">
     <meta property="og:description" content="Tu lugar en Buenos Aires. Mitre 3218. ¡Consultanos!">
-    
-    <!-- Link de imagen directo y público (IMPORTANTE) -->
-<meta property="og:image" content="https://raw.githubusercontent.com/santiagosaccoccia1982-crypto/Rinconcito-Urbano/main/filete.jpg">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1200&h=630&fit=crop">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:type" content="image/jpeg">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Charm:wght@700&display=swap');
+        
         body { font-family: 'Montserrat', sans-serif; background-color: #f8fafc; }
+        
+        /* Estilo Fileteado Porteño */
         .header-filete {
             background: #1e3a8a;
             background: radial-gradient(circle at center, #1e40af 0%, #172554 100%);
@@ -37,6 +36,7 @@
             box-shadow: 0 4px 25px rgba(0,0,0,0.4);
             overflow: hidden;
         }
+
         .text-balvanera {
             font-family: 'Charm', cursive;
             color: #fbbf24;
@@ -45,6 +45,7 @@
             text-shadow: 3px 3px 0px #0c1a44, 0px 0px 20px rgba(0,0,0,0.6);
             z-index: 10;
         }
+
         .brand-ribbon {
             background: #fbbf24;
             color: #1e3a8a;
@@ -59,13 +60,39 @@
             z-index: 10;
             display: inline-block;
         }
-        .glass-card { background: white; border-radius: 2rem; border: 1px solid #e2e8f0; }
-        .category-header { font-size: 0.75rem; font-weight: 900; color: #1e40af; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem; margin-bottom: 1rem; display: flex; align-items: center; }
-        .btn-main { border-radius: 1.25rem; padding: 1.1rem; font-weight: 800; display: flex; align-items: center; justify-content: space-between; }
+
+        .glass-card { background: white; border-radius: 2rem; border: 1px solid #e2e8f0; margin-bottom: 1rem; }
+        
+        .category-header { 
+            font-size: 0.75rem; 
+            font-weight: 900; 
+            color: #1e40af; 
+            text-transform: uppercase; 
+            letter-spacing: 0.1em; 
+            border-bottom: 2px solid #f1f5f9; 
+            padding-bottom: 0.5rem; 
+            margin-bottom: 1rem; 
+            display: flex; 
+            align-items: center; 
+        }
+        .category-header i { margin-right: 0.6rem; color: #fbbf24; }
+        
+        .location-item { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem; }
+        .location-name { font-size: 0.8rem; font-weight: 700; color: #334155; line-height: 1.2; }
+        .location-dist { font-size: 0.65rem; font-weight: 800; color: #1e40af; background: #eff6ff; padding: 2px 6px; border-radius: 4px; white-space: nowrap; }
+        
+        .highlight-nearby {
+            background: #fffbeb;
+            border: 2px solid #fbbf24;
+        }
+
+        .btn-main { border-radius: 1.25rem; padding: 1.1rem; font-weight: 800; display: flex; align-items: center; justify-content: space-between; transition: all 0.2s; }
+        .btn-main:active { transform: scale(0.95); }
     </style>
 </head>
 <body class="antialiased text-slate-900">
 
+    <!-- Encabezado Tipo Fileteado -->
     <header class="header-filete">
         <div class="text-center">
             <h1 class="text-balvanera">Balvanera</h1>
@@ -76,34 +103,186 @@
 
     <main class="max-w-md mx-auto px-5 -mt-8 relative z-20 space-y-4 pb-20">
         
+        <!-- Contacto y Acciones Rápidas -->
         <div class="space-y-2">
-            <a href="https://wa.me/5492914046014" target="_blank" class="btn-main bg-emerald-600 text-white shadow-lg active:scale-95 transition-transform">
+            <a href="https://wa.me/5492914046014" target="_blank" class="btn-main bg-emerald-600 text-white shadow-lg">
                 <div class="flex items-center">
                     <i class="fab fa-whatsapp text-2xl mr-4"></i>
-                    <div><p class="text-md leading-tight">Consultar Santiago</p><p class="text-[9px] opacity-70 uppercase font-black">Dueño Directo</p></div>
+                    <div>
+                        <p class="text-md leading-tight">Consultar Santiago</p>
+                        <p class="text-[9px] opacity-70 uppercase font-black">Dueño Directo</p>
+                    </div>
                 </div>
                 <i class="fas fa-chevron-right opacity-30"></i>
             </a>
+            
             <div class="grid grid-cols-2 gap-2">
-                <a href="https://photos.app.goo.gl/T6fEY8cKsD5eUvY1A" target="_blank" class="btn-main bg-white text-slate-700 border border-slate-200 p-3">
+                <a href="https://photos.app.goo.gl/T6fEY8cKsD5eUvY1A" target="_blank" class="btn-main bg-white text-slate-700 border border-slate-200 p-3 shadow-sm">
                     <i class="fas fa-camera text-blue-600 mr-2"></i> <span class="text-xs">Fotos</span>
                 </a>
-                <a href="https://www.google.com/maps/d/viewer?mid=1FWLID2GQQ1h2_5KIOtxWn_OahpjcI7U" target="_blank" class="btn-main bg-slate-800 text-white p-3">
+                <a href="https://maps.app.goo.gl/r6L8C6Yv8T1W6vV89" target="_blank" class="btn-main bg-slate-800 text-white p-3 shadow-sm">
                     <i class="fas fa-map-marker-alt text-amber-400 mr-2"></i> <span class="text-xs">Mapa</span>
                 </a>
             </div>
         </div>
 
-        <section class="glass-card p-5 shadow-sm border-l-4 border-l-amber-400">
-            <div class="category-header"><i class="fas fa-walking"></i> Comodidad a la vuelta</div>
-            <p class="text-xs text-slate-600 mb-2">Carrefour 24hs, Cocheras y transporte a metros.</p>
+        <!-- Bloque Resaltado: A UN PASO -->
+        <section class="glass-card p-5 shadow-md highlight-nearby border-l-4 border-l-amber-500">
+            <div class="category-header text-amber-700"><i class="fas fa-walking"></i> A un paso</div>
+            <div class="space-y-3">
+                <div class="location-item">
+                    <span class="location-name"><i class="fas fa-shopping-cart text-amber-600 mr-2"></i>Carrefour (Abierto 24 hs)</span>
+                    <span class="location-dist">A la vuelta</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-name"><i class="fas fa-bread-slice text-amber-600 mr-2"></i>Panadería Flores Porteñas</span>
+                    <span class="location-dist">A la vuelta</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-name"><i class="fas fa-hamburger text-amber-600 mr-2"></i>McDonald's</span>
+                    <span class="location-dist">A la vuelta</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-name"><i class="fas fa-gas-pump text-amber-600 mr-2"></i>Estaciones YPF / Axion</span>
+                    <span class="location-dist">A la vuelta</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-name"><i class="fas fa-car text-amber-600 mr-2"></i>Cocheras (Garajes comerciales)</span>
+                    <span class="location-dist">50 mts</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bloque: Eje Comercial Principal (CARTEL APARTE) -->
+        <section class="glass-card p-6 shadow-xl border-2 border-indigo-500 bg-indigo-50">
+            <div class="category-header text-indigo-800 border-indigo-200"><i class="fas fa-shopping-bag"></i> Eje Comercial Sur</div>
+            <div class="grid grid-cols-1 gap-4">
+                <div class="flex items-center justify-between bg-white p-4 rounded-2xl border border-indigo-100 shadow-sm">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white mr-3 shadow-md">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-black text-indigo-900 uppercase">Centro Comercial Once</p>
+                            <p class="text-[10px] text-indigo-600 font-bold uppercase tracking-wider">Shopping a cielo abierto</p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-black text-indigo-700 bg-indigo-100 px-3 py-1 rounded-full">3 Cuadras</span>
+                </div>
+                <div class="flex items-center justify-between bg-white p-4 rounded-2xl border border-indigo-100 shadow-sm">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-pink-600 rounded-full flex items-center justify-center text-white mr-3 shadow-md">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-black text-pink-900 uppercase">Abasto Shopping</p>
+                            <p class="text-[10px] text-pink-600 font-bold uppercase tracking-wider">Cines y Gastronomía</p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-black text-pink-700 bg-pink-100 px-3 py-1 rounded-full">4 Cuadras</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bloque: Seguridad y Confort -->
+        <section class="glass-card p-5 shadow-sm border-l-4 border-l-emerald-500">
+            <div class="category-header"><i class="fas fa-shield-alt"></i> Seguridad y Confort</div>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="flex items-center text-[10px] font-bold text-slate-600">
+                    <i class="fas fa-video text-emerald-500 mr-2"></i> Cámaras (Seguridad)
+                </div>
+                <div class="flex items-center text-[10px] font-bold text-slate-600">
+                    <i class="fas fa-snowflake text-sky-400 mr-2"></i> Aire Frío/Calor
+                </div>
+                <div class="flex items-center text-[10px] font-bold text-slate-600">
+                    <i class="fas fa-wifi text-blue-500 mr-2"></i> WiFi + TV Cable
+                </div>
+                <div class="flex items-center text-[10px] font-bold text-slate-600">
+                    <i class="fas fa-tint text-blue-300 mr-2"></i> Agua Caliente
+                </div>
+            </div>
+        </section>
+
+        <!-- Bloque: Movilidad Agrupada -->
+        <section class="bg-blue-900 p-6 rounded-[2rem] text-white shadow-xl">
+            <div class="category-header border-blue-800 text-blue-300"><i class="fas fa-bus"></i> Movilidad Total</div>
+            <div class="space-y-3">
+                <div class="flex items-center justify-between bg-blue-950/40 p-3 rounded-xl border border-blue-800">
+                    <div class="flex flex-col">
+                        <span class="text-xs font-bold"><i class="fas fa-route mr-2 text-sky-400"></i>+20 Líneas de Colectivo</span>
+                        <span class="text-[9px] text-sky-300/60 ml-6 italic">Conexión directa con Retiro</span>
+                    </div>
+                    <span class="text-[10px] font-black bg-sky-500/20 px-2 py-1 rounded">300 mts</span>
+                </div>
+                <div class="flex items-center justify-between bg-blue-950/40 p-3 rounded-xl border border-blue-800">
+                    <span class="text-xs font-bold"><i class="fas fa-subway mr-2 text-amber-400"></i>Subtes A, H y B</span>
+                    <span class="text-[10px] font-black bg-amber-500/20 px-2 py-1 rounded text-amber-300">Cercanos</span>
+                </div>
+                <div class="flex items-center justify-between bg-blue-950/40 p-3 rounded-xl border border-blue-800">
+                    <span class="text-xs font-bold"><i class="fas fa-bicycle mr-2 text-emerald-400"></i>Estación EcoBici</span>
+                    <span class="text-[10px] font-black bg-emerald-500/20 px-2 py-1 rounded text-emerald-300">50 mts</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bloque: Educación y Salud -->
+        <section class="glass-card p-5 shadow-sm border-l-4 border-l-red-400">
+            <div class="category-header"><i class="fas fa-university"></i> Educación y Salud</div>
+            <div class="space-y-3">
+                <div class="location-item">
+                    <span class="location-name"><i class="fas fa-book text-indigo-500 mr-2"></i>Facultad Psicología (UBA)</span>
+                    <span class="location-dist">450 mts</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-name"><i class="fas fa-graduation-cap text-indigo-500 mr-2"></i>Univ. del Salvador (USAL)</span>
+                    <span class="location-dist">600 mts</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-name"><i class="fas fa-hospital text-red-500 mr-2"></i>Sanatorio Trinidad</span>
+                    <span class="location-dist">Cercano</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-name"><i class="fas fa-hospital text-red-500 mr-2"></i>Hospital Ramos Mejía</span>
+                    <span class="location-dist">500 mts</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bloque: Lugares e Historia -->
+        <section class="glass-card p-5 shadow-sm border-l-4 border-l-blue-400">
+            <div class="category-header"><i class="fas fa-landmark"></i> Lugares e Historia</div>
+            <div class="space-y-3">
+                <div class="location-item">
+                    <span class="location-name"><i class="fas fa-utensils text-slate-400 mr-2"></i>Restaurant El Español</span>
+                    <span class="location-dist">Cercano</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-name">Congreso de la Nación</span>
+                    <span class="location-dist">Cercano</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-name">Mausoleo Rivadavia (Plaza Miserere)</span>
+                    <span class="location-dist">200 mts</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-name">Memorial Cromañón</span>
+                    <span class="location-dist">200 mts</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-name">Parque de la Estación</span>
+                    <span class="location-dist">60 mts</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-name">Café de los Angelitos</span>
+                    <span class="location-dist">500 mts</span>
+                </div>
+            </div>
         </section>
 
         <footer class="text-center py-6 opacity-40">
-            <p class="text-[9px] font-black uppercase tracking-[0.4em]">Mitre 3218 • Buenos Aires</p>
+            <p class="text-[9px] font-black uppercase tracking-[0.4em]">Rinconcito Urbano • Buenos Aires</p>
         </footer>
     </main>
 
 </body>
 </html>
-
