@@ -21,7 +21,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Charm:wght@700&display=swap');
         
-        body { font-family: 'Montserrat', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #f8fafc; -webkit-tap-highlight-color: transparent; }
         
         /* Estilo Fileteado Porteño */
         .header-filete {
@@ -86,7 +86,7 @@
             border: 2px solid #fbbf24;
         }
 
-        .btn-main { border-radius: 1.25rem; padding: 1.1rem; font-weight: 800; display: flex; align-items: center; justify-content: space-between; transition: all 0.2s; }
+        .btn-main { border-radius: 1.25rem; padding: 1.1rem; font-weight: 800; display: flex; align-items: center; justify-content: space-between; transition: all 0.2s; cursor: pointer; }
         .btn-main:active { transform: scale(0.95); }
     </style>
 </head>
@@ -120,8 +120,8 @@
                 <a href="https://photos.app.goo.gl/T6fEY8cKsD5eUvY1A" target="_blank" class="btn-main bg-white text-slate-700 border border-slate-200 p-3 shadow-sm">
                     <i class="fas fa-camera text-blue-600 mr-2"></i> <span class="text-xs">Fotos</span>
                 </a>
-                <!-- BOTÓN CORREGIDO CON TARGET BLANK Y LINK OPTIMIZADO -->
-                <a href="https://www.google.com/maps/d/u/0/viewer?mid=1FWLID2GQQ1h2_5KIOtxWn_OahpjcI7U" target="_blank" class="btn-main bg-slate-800 text-white p-3 shadow-sm">
+                <!-- LINK CORREGIDO: Se cambió 'edit' por 'viewer' para forzar la vista de usuario y evitar modo escritorio -->
+                <a href="https://www.google.com/maps/d/viewer?mid=1FWLID2GQQ1h2_5KIOtxWn_OahpjcI7U" target="_blank" class="btn-main bg-slate-800 text-white p-3 shadow-sm">
                     <i class="fas fa-map-marker-alt text-amber-400 mr-2"></i> <span class="text-xs">Mapa</span>
                 </a>
             </div>
