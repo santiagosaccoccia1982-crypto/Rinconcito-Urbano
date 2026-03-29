@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- CONFIGURACIÓN DE MINIATURA (Open Graph) - CONSERVADA Y OPTIMIZADA -->
     <title>Rinconcito Urbano - Balvanera</title>
     <meta name="description" content="Alquiler temporal en CABA. Mitre 3218. Comodidad, seguridad y estilo porteño.">
     
@@ -13,8 +12,6 @@
     <meta property="og:title" content="Rinconcito Urbano - Balvanera">
     <meta property="og:description" content="Tu lugar en Buenos Aires. Mitre 3218. ¡Consultanos!">
     <meta property="og:image" content="https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1200&h=630&fit=crop">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -23,7 +20,6 @@
         
         body { font-family: 'Montserrat', sans-serif; background-color: #f8fafc; -webkit-tap-highlight-color: transparent; }
         
-        /* Estilo Fileteado Porteño */
         .header-filete {
             background: #1e3a8a;
             background: radial-gradient(circle at center, #1e40af 0%, #172554 100%);
@@ -83,23 +79,24 @@
         
         .highlight-nearby { background: #fffbeb; border: 2px solid #fbbf24; }
 
-        .btn-main { border-radius: 1.25rem; padding: 1.1rem; font-weight: 800; display: flex; align-items: center; justify-content: space-between; transition: all 0.2s; cursor: pointer; }
+        .btn-main { border-radius: 1.25rem; padding: 1.1rem; font-weight: 800; display: flex; align-items: center; justify-content: space-between; transition: all 0.2s; cursor: pointer; border: none; width: 100%; text-align: left; }
         .btn-main:active { transform: scale(0.95); }
 
-        /* Estilos Reseñas */
-        .review-item { border-bottom: 1px solid #f1f5f9; padding: 12px 0; }
+        .review-item { border-bottom: 1px solid #f1f5f9; padding: 10px 0; }
         .review-item:last-child { border-bottom: none; }
-        .custom-scroll::-webkit-scrollbar { width: 4px; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-
-        /* Modal */
-        #modal-overlay {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(8px);
+        
+        #modal-review {
             display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
             z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
-        #modal-overlay.active { display: flex; }
+        #modal-review.active { display: flex; }
     </style>
 </head>
 <body class="antialiased text-slate-900">
@@ -114,7 +111,7 @@
 
     <main class="max-w-md mx-auto px-5 -mt-8 relative z-20 space-y-4 pb-20">
         
-        <!-- Contacto y Acciones Rápidas -->
+        <!-- Contacto y Acciones -->
         <div class="space-y-2">
             <a href="https://wa.me/5492914046014" target="_blank" class="btn-main bg-emerald-600 text-white shadow-lg">
                 <div class="flex items-center">
@@ -134,171 +131,75 @@
                 <a href="https://www.google.com/maps/d/viewer?mid=1FWLID2GQQ1h2_5KIOtxWn_OahpjcI7U" target="_blank" class="btn-main bg-slate-800 text-white p-3 shadow-sm justify-center">
                     <i class="fas fa-map-marker-alt text-amber-400"></i>
                 </a>
-                <button id="btn-open-modal" class="btn-main bg-amber-400 text-blue-900 p-3 shadow-sm border-b-4 border-amber-600 justify-center">
+                <button id="open-review" class="btn-main bg-amber-400 text-blue-900 p-3 shadow-sm border-b-4 border-amber-600 justify-center">
                     <i class="fas fa-pen-nib"></i>
                 </button>
             </div>
         </div>
 
-        <!-- LIBRO DE VISITAS (Agregado manteniendo el estilo) -->
+        <!-- LIBRO DE VISITAS -->
         <section class="glass-card p-5 shadow-lg border-t-4 border-t-blue-600">
-            <div class="category-header text-blue-900"><i class="fas fa-star text-amber-400"></i> Libro de Visitas</div>
-            <div id="reviews-list" class="max-h-60 overflow-y-auto custom-scroll pr-2">
-                <div class="flex justify-center py-8">
-                    <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
-                </div>
+            <div class="category-header text-blue-900"><i class="fas fa-star"></i> Libro de Visitas</div>
+            <div id="display-reviews" class="max-h-48 overflow-y-auto pr-1 space-y-1">
+                <p class="text-[10px] text-slate-400 italic text-center py-4">Cargando comentarios...</p>
             </div>
         </section>
 
-        <!-- Bloque Resaltado: A UN PASO -->
+        <!-- Bloque: A UN PASO -->
         <section class="glass-card p-5 shadow-md highlight-nearby border-l-4 border-l-amber-500">
             <div class="category-header text-amber-700"><i class="fas fa-walking"></i> A un paso</div>
             <div class="space-y-3">
-                <div class="location-item">
-                    <span class="location-name"><i class="fas fa-shopping-cart text-amber-600 mr-2"></i>Carrefour (Abierto 24 hs)</span>
-                    <span class="location-dist">A la vuelta</span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name"><i class="fas fa-bread-slice text-amber-600 mr-2"></i>Panadería Flores Porteñas</span>
-                    <span class="location-dist">A la vuelta</span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name"><i class="fas fa-hamburger text-amber-600 mr-2"></i>McDonald's</span>
-                    <span class="location-dist">A la vuelta</span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name"><i class="fas fa-gas-pump text-amber-600 mr-2"></i>Estaciones YPF / Axion</span>
-                    <span class="location-dist">A la vuelta</span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name"><i class="fas fa-car text-amber-600 mr-2"></i>Cocheras (Garajes comerciales)</span>
-                    <span class="location-dist">50 mts</span>
-                </div>
+                <div class="location-item"><span class="location-name"><i class="fas fa-shopping-cart text-amber-600 mr-2"></i>Carrefour (24 hs)</span><span class="location-dist">A la vuelta</span></div>
+                <div class="location-item"><span class="location-name"><i class="fas fa-bread-slice text-amber-600 mr-2"></i>Panadería Flores</span><span class="location-dist">A la vuelta</span></div>
+                <div class="location-item"><span class="location-name"><i class="fas fa-hamburger text-amber-600 mr-2"></i>McDonald's</span><span class="location-dist">A la vuelta</span></div>
+                <div class="location-item"><span class="location-name"><i class="fas fa-gas-pump text-amber-600 mr-2"></i>Estaciones YPF</span><span class="location-dist">A la vuelta</span></div>
+                <div class="location-item"><span class="location-name"><i class="fas fa-car text-amber-600 mr-2"></i>Cocheras</span><span class="location-dist">50 mts</span></div>
             </div>
         </section>
 
         <!-- Bloque: Eje Comercial Principal -->
         <section class="glass-card p-6 shadow-xl border-2 border-indigo-500 bg-indigo-50">
-            <div class="category-header text-indigo-800 border-indigo-200"><i class="fas fa-shopping-bag text-indigo-500"></i> Eje Comercial Sur</div>
-            <div class="grid grid-cols-1 gap-4">
-                <div class="flex items-center justify-between bg-white p-4 rounded-2xl border border-indigo-100 shadow-sm">
+            <div class="category-header text-indigo-800 border-indigo-200"><i class="fas fa-shopping-bag"></i> Eje Comercial Sur</div>
+            <div class="space-y-3">
+                <div class="flex items-center justify-between bg-white p-3 rounded-xl border border-indigo-100">
                     <div class="flex items-center">
-                        <div class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white mr-3 shadow-md">
-                            <i class="fas fa-store"></i>
-                        </div>
-                        <div>
-                            <p class="text-xs font-black text-indigo-900 uppercase">Centro Comercial Once</p>
-                            <p class="text-[10px] text-indigo-600 font-bold uppercase tracking-wider">Shopping a cielo abierto</p>
-                        </div>
+                        <div class="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center text-white mr-3 shadow-md"><i class="fas fa-store text-[10px]"></i></div>
+                        <div><p class="text-[10px] font-black text-indigo-900 uppercase">Centro Once</p></div>
                     </div>
-                    <span class="text-xs font-black text-indigo-700 bg-indigo-100 px-3 py-1 rounded-full">3 Cuadras</span>
+                    <span class="text-[9px] font-black text-indigo-700 bg-indigo-100 px-2 py-1 rounded-full">3 Cuadras</span>
                 </div>
-                <div class="flex items-center justify-between bg-white p-4 rounded-2xl border border-indigo-100 shadow-sm">
+                <div class="flex items-center justify-between bg-white p-3 rounded-xl border border-indigo-100">
                     <div class="flex items-center">
-                        <div class="w-10 h-10 bg-pink-600 rounded-full flex items-center justify-center text-white mr-3 shadow-md">
-                            <i class="fas fa-building"></i>
-                        </div>
-                        <div>
-                            <p class="text-xs font-black text-pink-900 uppercase">Abasto Shopping</p>
-                            <p class="text-[10px] text-pink-600 font-bold uppercase tracking-wider">Cines y Gastronomía</p>
-                        </div>
+                        <div class="w-8 h-8 bg-pink-600 rounded-full flex items-center justify-center text-white mr-3 shadow-md"><i class="fas fa-building text-[10px]"></i></div>
+                        <div><p class="text-[10px] font-black text-pink-900 uppercase">Abasto Shopping</p></div>
                     </div>
-                    <span class="text-xs font-black text-pink-700 bg-pink-100 px-3 py-1 rounded-full">4 Cuadras</span>
+                    <span class="text-[9px] font-black text-pink-700 bg-pink-100 px-2 py-1 rounded-full">4 Cuadras</span>
                 </div>
             </div>
         </section>
 
         <!-- Bloque: Seguridad y Confort -->
-        <section class="glass-card p-5 shadow-sm border-l-4 border-l-emerald-500">
-            <div class="category-header"><i class="fas fa-shield-alt text-emerald-500"></i> Seguridad y Confort</div>
+        <section class="glass-card p-5 border-l-4 border-l-emerald-500">
+            <div class="category-header"><i class="fas fa-shield-alt"></i> Seguridad y Confort</div>
             <div class="grid grid-cols-2 gap-3">
-                <div class="flex items-center text-[10px] font-bold text-slate-600">
-                    <i class="fas fa-video text-emerald-500 mr-2"></i> Cámaras (Seguridad)
-                </div>
-                <div class="flex items-center text-[10px] font-bold text-slate-600">
-                    <i class="fas fa-snowflake text-sky-400 mr-2"></i> Aire Frío/Calor
-                </div>
-                <div class="flex items-center text-[10px] font-bold text-slate-600">
-                    <i class="fas fa-wifi text-blue-500 mr-2"></i> WiFi + TV Cable
-                </div>
-                <div class="flex items-center text-[10px] font-bold text-slate-600">
-                    <i class="fas fa-tint text-blue-300 mr-2"></i> Agua Caliente
-                </div>
+                <div class="flex items-center text-[10px] font-bold text-slate-600"><i class="fas fa-video text-emerald-500 mr-2"></i> Cámaras</div>
+                <div class="flex items-center text-[10px] font-bold text-slate-600"><i class="fas fa-snowflake text-sky-400 mr-2"></i> Aire F/C</div>
+                <div class="flex items-center text-[10px] font-bold text-slate-600"><i class="fas fa-wifi text-blue-500 mr-2"></i> WiFi + TV</div>
+                <div class="flex items-center text-[10px] font-bold text-slate-600"><i class="fas fa-tint text-blue-300 mr-2"></i> Agua Caliente</div>
             </div>
         </section>
 
-        <!-- Bloque: Movilidad Agrupada -->
+        <!-- Bloque: Movilidad -->
         <section class="bg-blue-900 p-6 rounded-[2rem] text-white shadow-xl">
-            <div class="category-header border-blue-800 text-blue-300"><i class="fas fa-bus text-sky-400"></i> Movilidad Total</div>
-            <div class="space-y-3">
-                <div class="flex items-center justify-between bg-blue-950/40 p-3 rounded-xl border border-blue-800">
-                    <div class="flex flex-col">
-                        <span class="text-xs font-bold"><i class="fas fa-route mr-2 text-sky-400"></i>+20 Líneas de Colectivo</span>
-                        <span class="text-[9px] text-sky-300/60 ml-6 italic">Conexión directa con Retiro</span>
-                    </div>
-                    <span class="text-[10px] font-black bg-sky-500/20 px-2 py-1 rounded">300 mts</span>
+            <div class="category-header border-blue-800 text-blue-300"><i class="fas fa-bus"></i> Movilidad Total</div>
+            <div class="space-y-2">
+                <div class="flex items-center justify-between bg-blue-950/40 p-2 rounded-lg border border-blue-800">
+                    <span class="text-[10px] font-bold"><i class="fas fa-route mr-2 text-sky-400"></i>+20 Líneas</span>
+                    <span class="text-[9px] font-black bg-sky-500/20 px-2 py-1 rounded">300 mts</span>
                 </div>
-                <div class="flex items-center justify-between bg-blue-950/40 p-3 rounded-xl border border-blue-800">
-                    <span class="text-xs font-bold"><i class="fas fa-subway mr-2 text-amber-400"></i>Subtes A, H y B</span>
-                    <span class="text-[10px] font-black bg-amber-500/20 px-2 py-1 rounded text-amber-300">Cercanos</span>
-                </div>
-                <div class="flex items-center justify-between bg-blue-950/40 p-3 rounded-xl border border-blue-800">
-                    <span class="text-xs font-bold"><i class="fas fa-bicycle mr-2 text-emerald-400"></i>Estación EcoBici</span>
-                    <span class="text-[10px] font-black bg-emerald-500/20 px-2 py-1 rounded text-emerald-300">50 mts</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Bloque: Educación y Salud -->
-        <section class="glass-card p-5 shadow-sm border-l-4 border-l-red-400">
-            <div class="category-header"><i class="fas fa-university text-red-400"></i> Educación y Salud</div>
-            <div class="space-y-3">
-                <div class="location-item">
-                    <span class="location-name"><i class="fas fa-book text-indigo-500 mr-2"></i>Facultad Psicología (UBA)</span>
-                    <span class="location-dist">450 mts</span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name"><i class="fas fa-graduation-cap text-indigo-500 mr-2"></i>Univ. del Salvador (USAL)</span>
-                    <span class="location-dist">600 mts</span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name"><i class="fas fa-hospital text-red-500 mr-2"></i>Sanatorio Trinidad</span>
-                    <span class="location-dist">Cercano</span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name"><i class="fas fa-hospital text-red-500 mr-2"></i>Hospital Ramos Mejía</span>
-                    <span class="location-dist">500 mts</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Bloque: Lugares e Historia -->
-        <section class="glass-card p-5 shadow-sm border-l-4 border-l-blue-400">
-            <div class="category-header"><i class="fas fa-landmark text-blue-400"></i> Lugares e Historia</div>
-            <div class="space-y-3">
-                <div class="location-item">
-                    <span class="location-name"><i class="fas fa-utensils text-slate-400 mr-2"></i>Restaurant El Español</span>
-                    <span class="location-dist">Cercano</span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name">Congreso de la Nación</span>
-                    <span class="location-dist">Cercano</span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name">Mausoleo Rivadavia (Plaza Miserere)</span>
-                    <span class="location-dist">200 mts</span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name">Memorial Cromañón</span>
-                    <span class="location-dist">200 mts</span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name">Parque de la Estación</span>
-                    <span class="location-dist">60 mts</span>
-                </div>
-                <div class="location-item">
-                    <span class="location-name">Café de los Angelitos</span>
-                    <span class="location-dist">500 mts</span>
+                <div class="flex items-center justify-between bg-blue-950/40 p-2 rounded-lg border border-blue-800">
+                    <span class="text-[10px] font-bold"><i class="fas fa-subway mr-2 text-amber-400"></i>Subtes A, H y B</span>
+                    <span class="text-[9px] font-black bg-amber-500/20 px-2 py-1 rounded text-amber-300">Cerca</span>
                 </div>
             </div>
         </section>
@@ -308,23 +209,23 @@
         </footer>
     </main>
 
-    <!-- MODAL DE RESEÑAS -->
-    <div id="modal-overlay" class="fixed inset-0 items-center justify-center p-4">
-        <div class="bg-white w-full max-w-sm rounded-[2.5rem] shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
-            <div class="bg-blue-950 p-6 text-center border-b-4 border-amber-400">
-                <h3 class="text-amber-400 font-black uppercase text-xs tracking-widest">¿Cómo fue tu estadía?</h3>
+    <!-- MODAL PARA ESCRIBIR COMENTARIO -->
+    <div id="modal-review">
+        <div class="bg-white w-full max-w-xs rounded-[2rem] overflow-hidden shadow-2xl">
+            <div class="bg-blue-900 p-4 text-center border-b-4 border-amber-400">
+                <h3 class="text-white font-black text-[10px] uppercase tracking-widest">Tu Opinión</h3>
             </div>
-            <form id="review-form" class="p-6 space-y-4">
-                <input type="text" id="rev-name" placeholder="Tu Nombre" required class="w-full bg-slate-50 rounded-2xl p-4 text-xs font-bold outline-none focus:ring-2 focus:ring-amber-400">
-                <select id="rev-stars" class="w-full bg-slate-50 rounded-2xl p-4 text-xs font-bold outline-none cursor-pointer">
+            <form id="form-review" class="p-5 space-y-3">
+                <input type="text" id="user-name" placeholder="Tu nombre" required class="w-full bg-slate-100 p-3 rounded-xl text-[11px] font-bold outline-none border-2 border-transparent focus:border-amber-400">
+                <select id="user-rating" class="w-full bg-slate-100 p-3 rounded-xl text-[11px] font-bold outline-none">
                     <option value="5">⭐⭐⭐⭐⭐ Excelente</option>
-                    <option value="4">⭐⭐⭐⭐ Muy Bueno</option>
+                    <option value="4">⭐⭐⭐⭐ Muy bueno</option>
                     <option value="3">⭐⭐⭐ Bueno</option>
                 </select>
-                <textarea id="rev-comment" placeholder="Contanos tu experiencia..." required class="w-full bg-slate-50 rounded-2xl p-4 text-xs font-bold h-24 outline-none focus:ring-2 focus:ring-amber-400"></textarea>
-                <div class="grid grid-cols-2 gap-3 pt-2">
-                    <button type="button" id="btn-close-modal" class="bg-slate-100 text-slate-500 py-4 rounded-2xl font-black text-[10px] uppercase">Cerrar</button>
-                    <button type="submit" id="btn-submit" class="bg-blue-600 text-white py-4 rounded-2xl font-black text-[10px] uppercase">Publicar</button>
+                <textarea id="user-comment" placeholder="Comentario..." required class="w-full bg-slate-100 p-3 rounded-xl text-[11px] font-bold h-20 outline-none border-2 border-transparent focus:border-amber-400"></textarea>
+                <div class="grid grid-cols-2 gap-2">
+                    <button type="button" id="close-review" class="bg-slate-200 text-slate-600 py-3 rounded-xl font-black text-[9px] uppercase">Cancelar</button>
+                    <button type="submit" id="send-review" class="bg-blue-600 text-white py-3 rounded-xl font-black text-[9px] uppercase">Enviar</button>
                 </div>
             </form>
         </div>
@@ -332,69 +233,89 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
         const firebaseConfig = JSON.parse(__firebase_config);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'rinconcito-balvanera-final';
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'rinconcito-urbano-v2';
         
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // UI Logic
-        const modal = document.getElementById('modal-overlay');
-        const openBtn = document.getElementById('btn-open-modal');
-        const closeBtn = document.getElementById('btn-close-modal');
-        const reviewForm = document.getElementById('review-form');
-        const reviewsList = document.getElementById('reviews-list');
+        const modal = document.getElementById('modal-review');
+        const openBtn = document.getElementById('open-review');
+        const closeBtn = document.getElementById('close-review');
+        const form = document.getElementById('form-review');
+        const display = document.getElementById('display-reviews');
 
         openBtn.onclick = () => modal.classList.add('active');
         closeBtn.onclick = () => modal.classList.remove('active');
 
-        // Firebase Logic
-        const startApp = async () => {
-            await signInAnonymously(auth);
-            const colRef = collection(db, 'artifacts', appId, 'public', 'data', 'reviews');
+        // Función para cargar y ver comentarios
+        const loadReviews = (user) => {
+            if(!user) return;
+            const colRef = collection(db, 'artifacts', appId, 'public', 'data', 'guestbook');
             
+            // onSnapshot con manejador de éxito y error
             onSnapshot(colRef, (snap) => {
                 const reviews = snap.docs.map(doc => doc.data())
-                    .sort((a,b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+                    .sort((a,b) => (b.date?.seconds || 0) - (a.date?.seconds || 0));
 
                 if(reviews.length === 0) {
-                    reviewsList.innerHTML = '<p class="text-[10px] text-center py-4 text-slate-400 font-bold uppercase">Sin opiniones aún</p>';
-                } else {
-                    reviewsList.innerHTML = reviews.map(r => `
-                        <div class="review-item">
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="text-[10px] font-black text-blue-900 uppercase">${r.name}</span>
-                                <span class="text-[8px] text-amber-500">${'★'.repeat(r.rating)}</span>
-                            </div>
-                            <p class="text-[10px] text-slate-500 leading-snug italic">"${r.comment}"</p>
-                        </div>
-                    `).join('');
+                    display.innerHTML = '<p class="text-[9px] text-center py-4 text-slate-400 font-bold uppercase">Sin comentarios aún</p>';
+                    return;
                 }
+
+                display.innerHTML = reviews.map(r => `
+                    <div class="review-item">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-[10px] font-black text-blue-900 uppercase">${r.name}</span>
+                            <span class="text-[8px] text-amber-500">${'★'.repeat(r.rating)}</span>
+                        </div>
+                        <p class="text-[10px] text-slate-500 italic">"${r.comment}"</p>
+                    </div>
+                `).join('');
+            }, (err) => {
+                console.error("Error en snapshot:", err);
+                display.innerHTML = '<p class="text-[9px] text-center py-4 text-red-400 font-bold uppercase">Error al cargar</p>';
             });
         };
 
-        reviewForm.onsubmit = async (e) => {
-            e.preventDefault();
-            const btn = document.getElementById('btn-submit');
-            btn.disabled = true;
-            try {
-                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'reviews'), {
-                    name: document.getElementById('rev-name').value,
-                    rating: parseInt(document.getElementById('rev-stars').value),
-                    comment: document.getElementById('rev-comment').value,
-                    createdAt: serverTimestamp()
-                });
-                reviewForm.reset();
-                modal.classList.remove('active');
-            } catch (e) { console.error(e); }
-            finally { btn.disabled = false; }
-        };
+        // Escuchar cambios de autenticación
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                loadReviews(user);
+            } else {
+                signInAnonymously(auth);
+            }
+        });
 
-        startApp();
+        // Función para enviar comentario
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+            const submitBtn = document.getElementById('send-review');
+            if(!auth.currentUser) return;
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = "...";
+
+            try {
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'guestbook'), {
+                    name: document.getElementById('user-name').value,
+                    rating: parseInt(document.getElementById('user-rating').value),
+                    comment: document.getElementById('user-comment').value,
+                    date: serverTimestamp()
+                });
+                form.reset();
+                modal.classList.remove('active');
+            } catch (error) {
+                console.error("Error al guardar:", error);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Enviar";
+            }
+        };
     </script>
 </body>
 </html>
