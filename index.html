@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- CONFIGURACIÓN DE MINIATURA (Open Graph) -->
+    <!-- CONFIGURACIÓN DE MINIATURA (Open Graph) - CONSERVADA Y OPTIMIZADA -->
     <title>Rinconcito Urbano - Balvanera</title>
     <meta name="description" content="Alquiler temporal en CABA. Mitre 3218. Comodidad, seguridad y estilo porteño.">
     
@@ -13,6 +13,8 @@
     <meta property="og:title" content="Rinconcito Urbano - Balvanera">
     <meta property="og:description" content="Tu lugar en Buenos Aires. Mitre 3218. ¡Consultanos!">
     <meta property="og:image" content="https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1200&h=630&fit=crop">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -23,6 +25,7 @@
         
         /* Estilo Fileteado Porteño */
         .header-filete {
+            background: #1e3a8a;
             background: radial-gradient(circle at center, #1e40af 0%, #172554 100%);
             height: 35vh;
             position: relative;
@@ -86,12 +89,19 @@
         .btn-main { border-radius: 1.25rem; padding: 1.1rem; font-weight: 800; display: flex; align-items: center; justify-content: space-between; transition: all 0.2s; cursor: pointer; }
         .btn-main:active { transform: scale(0.95); }
 
-        #review-modal { backdrop-filter: blur(8px); }
-        .review-card { padding: 1rem; border-bottom: 1px solid #f1f5f9; }
+        /* Estilos de Reseñas */
+        .review-card { border-bottom: 1px solid #f1f5f9; padding: 12px 0; }
+        .review-card:last-child { border-bottom: none; }
+
+        #modal-overlay {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(4px);
+        }
     </style>
 </head>
 <body class="antialiased text-slate-900">
 
+    <!-- Encabezado Tipo Fileteado -->
     <header class="header-filete">
         <div class="text-center">
             <h1 class="text-balvanera">Balvanera</h1>
@@ -119,85 +129,138 @@
                 <a href="https://photos.app.goo.gl/T6fEY8cKsD5eUvY1A" target="_blank" class="btn-main bg-white text-slate-700 border border-slate-200 p-3 shadow-sm">
                     <i class="fas fa-camera text-blue-600 mr-2"></i> <span class="text-xs">Fotos</span>
                 </a>
-                <a href="https://www.google.com/maps/d/viewer?mid=1FWLID2GQQ1h2_5KIOtxWn_OahpjcI7U" target="_blank" class="btn-main bg-slate-800 text-white p-3 shadow-sm">
-                    <i class="fas fa-map-marker-alt text-amber-400 mr-2"></i> <span class="text-xs">Mapa</span>
-                </a>
+                <button onclick="openReviewModal()" class="btn-main bg-amber-400 text-blue-900 p-3 shadow-sm">
+                    <i class="fas fa-pen-nib mr-2"></i> <span class="text-xs">Opinar</span>
+                </button>
             </div>
         </div>
 
-        <!-- SECCIÓN DE RESEÑAS -->
-        <section class="glass-card shadow-xl overflow-hidden">
-            <div class="bg-blue-900 px-5 py-3 flex justify-between items-center">
-                <h3 class="text-white font-black text-[10px] uppercase tracking-widest">Reseñas de Huéspedes</h3>
-                <button id="btn-open-review" class="bg-amber-400 text-blue-900 px-4 py-1 rounded-full text-[9px] font-black uppercase shadow-lg">Escribir</button>
-            </div>
-            <div id="reviews-list" class="max-h-64 overflow-y-auto bg-white min-h-[80px]">
-                <div class="p-8 text-center text-slate-300">
-                    <i class="fas fa-circle-notch animate-spin mb-2"></i>
-                    <p class="text-[9px] font-bold uppercase tracking-widest">Conectando...</p>
+        <!-- Bloque Mapa Interactivo (NUEVO) -->
+        <section class="glass-card shadow-md">
+            <div class="p-4">
+                <div class="category-header"><i class="fas fa-map-marked-alt"></i> Mapa del Barrio</div>
+                <div class="rounded-2xl overflow-hidden h-48 bg-slate-100 relative">
+                    <iframe 
+                        width="100%" height="100%" frameborder="0" style="border:0" 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.943!2d-58.4116035!3d-34.6055811!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcca8cb845204d%3A0x64d99f0e1a12345!2sBartolom%C3%A9%20Mitre%203218!5e0!3m2!1ses!2sar!4v1711650000000" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="mt-3 text-center">
+                    <a href="https://www.google.com/maps/d/viewer?mid=1FWLID2GQQ1h2_5KIOtxWn_OahpjcI7U" target="_blank" class="text-[10px] font-black text-blue-600 uppercase">Ver mapa detallado de Santiago <i class="fas fa-external-link-alt ml-1"></i></a>
                 </div>
             </div>
         </section>
 
-        <!-- A UN PASO -->
-        <section class="glass-card p-5 shadow-md highlight-nearby border-l-4 border-l-amber-500">
-            <div class="category-header text-amber-700"><i class="fas fa-walking"></i> A un paso</div>
-            <div class="space-y-3">
-                <div class="location-item"><span class="location-name"><i class="fas fa-shopping-cart text-amber-600 mr-2"></i>Carrefour (24 hs)</span><span class="location-dist">A la vuelta</span></div>
-                <div class="location-item"><span class="location-name"><i class="fas fa-bread-slice text-amber-600 mr-2"></i>Panadería Flores Porteñas</span><span class="location-dist">A la vuelta</span></div>
-                <div class="location-item"><span class="location-name"><i class="fas fa-hamburger text-amber-600 mr-2"></i>McDonald's</span><span class="location-dist">A la vuelta</span></div>
-                <div class="location-item"><span class="location-name"><i class="fas fa-gas-pump text-amber-600 mr-2"></i>Estaciones YPF / Axion</span><span class="location-dist">A la vuelta</span></div>
+        <!-- Bloque Reseñas (NUEVO) -->
+        <section class="glass-card p-5 shadow-md">
+            <div class="category-header"><i class="fas fa-star"></i> Reseñas de Huéspedes</div>
+            <div id="reviews-list" class="max-h-60 overflow-y-auto space-y-1">
+                <!-- Se cargan vía JS -->
+                <p class="text-center text-slate-400 text-xs italic py-4">Cargando comentarios...</p>
             </div>
         </section>
 
-        <!-- EJE COMERCIAL SUR -->
+        <!-- Bloque Resaltado: A UN PASO -->
+        <section class="glass-card p-5 shadow-md highlight-nearby border-l-4 border-l-amber-500">
+            <div class="category-header text-amber-700"><i class="fas fa-walking"></i> A un paso</div>
+            <div class="space-y-3">
+                <div class="location-item">
+                    <span class="location-name"><i class="fas fa-shopping-cart text-amber-600 mr-2"></i>Carrefour (Abierto 24 hs)</span>
+                    <span class="location-dist">A la vuelta</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-name"><i class="fas fa-bread-slice text-amber-600 mr-2"></i>Panadería Flores Porteñas</span>
+                    <span class="location-dist">A la vuelta</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-name"><i class="fas fa-hamburger text-amber-600 mr-2"></i>McDonald's</span>
+                    <span class="location-dist">A la vuelta</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-name"><i class="fas fa-gas-pump text-amber-600 mr-2"></i>Estaciones YPF / Axion</span>
+                    <span class="location-dist">A la vuelta</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-name"><i class="fas fa-car text-amber-600 mr-2"></i>Cocheras (Garajes comerciales)</span>
+                    <span class="location-dist">50 mts</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bloque: Eje Comercial Principal (CARTEL APARTE) -->
         <section class="glass-card p-6 shadow-xl border-2 border-indigo-500 bg-indigo-50">
             <div class="category-header text-indigo-800 border-indigo-200"><i class="fas fa-shopping-bag"></i> Eje Comercial Sur</div>
-            <div class="space-y-4">
+            <div class="grid grid-cols-1 gap-4">
                 <div class="flex items-center justify-between bg-white p-4 rounded-2xl border border-indigo-100 shadow-sm">
                     <div class="flex items-center">
-                        <div class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white mr-3 shadow-md"><i class="fas fa-store"></i></div>
-                        <div><p class="text-xs font-black text-indigo-900 uppercase">Centro Once</p><p class="text-[10px] text-indigo-600 font-bold uppercase">Compras</p></div>
+                        <div class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white mr-3 shadow-md">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-black text-indigo-900 uppercase">Centro Comercial Once</p>
+                            <p class="text-[10px] text-indigo-600 font-bold uppercase tracking-wider">Shopping a cielo abierto</p>
+                        </div>
                     </div>
                     <span class="text-xs font-black text-indigo-700 bg-indigo-100 px-3 py-1 rounded-full">3 Cuadras</span>
                 </div>
                 <div class="flex items-center justify-between bg-white p-4 rounded-2xl border border-indigo-100 shadow-sm">
                     <div class="flex items-center">
-                        <div class="w-10 h-10 bg-pink-600 rounded-full flex items-center justify-center text-white mr-3 shadow-md"><i class="fas fa-building"></i></div>
-                        <div><p class="text-xs font-black text-pink-900 uppercase">Abasto Shopping</p><p class="text-[10px] text-pink-600 font-bold uppercase">Cines/Comida</p></div>
+                        <div class="w-10 h-10 bg-pink-600 rounded-full flex items-center justify-center text-white mr-3 shadow-md">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-black text-pink-900 uppercase">Abasto Shopping</p>
+                            <p class="text-[10px] text-pink-600 font-bold uppercase tracking-wider">Cines y Gastronomía</p>
+                        </div>
                     </div>
                     <span class="text-xs font-black text-pink-700 bg-pink-100 px-3 py-1 rounded-full">4 Cuadras</span>
                 </div>
             </div>
         </section>
 
-        <!-- SEGURIDAD Y CONFORT -->
+        <!-- Bloque: Seguridad y Confort -->
         <section class="glass-card p-5 shadow-sm border-l-4 border-l-emerald-500">
             <div class="category-header"><i class="fas fa-shield-alt"></i> Seguridad y Confort</div>
             <div class="grid grid-cols-2 gap-3">
-                <div class="flex items-center text-[10px] font-bold text-slate-600"><i class="fas fa-video text-emerald-500 mr-2"></i> Cámaras</div>
-                <div class="flex items-center text-[10px] font-bold text-slate-600"><i class="fas fa-snowflake text-sky-400 mr-2"></i> Aire F/C</div>
-                <div class="flex items-center text-[10px] font-bold text-slate-600"><i class="fas fa-wifi text-blue-500 mr-2"></i> WiFi + TV</div>
-                <div class="flex items-center text-[10px] font-bold text-slate-600"><i class="fas fa-tint text-blue-300 mr-2"></i> Agua Caliente</div>
+                <div class="flex items-center text-[10px] font-bold text-slate-600">
+                    <i class="fas fa-video text-emerald-500 mr-2"></i> Cámaras (Seguridad)
+                </div>
+                <div class="flex items-center text-[10px] font-bold text-slate-600">
+                    <i class="fas fa-snowflake text-sky-400 mr-2"></i> Aire Frío/Calor
+                </div>
+                <div class="flex items-center text-[10px] font-bold text-slate-600">
+                    <i class="fas fa-wifi text-blue-500 mr-2"></i> WiFi + TV Cable
+                </div>
+                <div class="flex items-center text-[10px] font-bold text-slate-600">
+                    <i class="fas fa-tint text-blue-300 mr-2"></i> Agua Caliente
+                </div>
             </div>
         </section>
 
-        <!-- MOVILIDAD -->
+        <!-- Bloque: Movilidad Agrupada -->
         <section class="bg-blue-900 p-6 rounded-[2rem] text-white shadow-xl">
             <div class="category-header border-blue-800 text-blue-300"><i class="fas fa-bus"></i> Movilidad Total</div>
             <div class="space-y-3">
                 <div class="flex items-center justify-between bg-blue-950/40 p-3 rounded-xl border border-blue-800">
-                    <span class="text-xs font-bold"><i class="fas fa-route mr-2 text-sky-400"></i>+20 Líneas de Colectivo</span>
+                    <div class="flex flex-col">
+                        <span class="text-xs font-bold"><i class="fas fa-route mr-2 text-sky-400"></i>+20 Líneas de Colectivo</span>
+                        <span class="text-[9px] text-sky-300/60 ml-6 italic">Conexión directa con Retiro</span>
+                    </div>
                     <span class="text-[10px] font-black bg-sky-500/20 px-2 py-1 rounded">300 mts</span>
                 </div>
                 <div class="flex items-center justify-between bg-blue-950/40 p-3 rounded-xl border border-blue-800">
                     <span class="text-xs font-bold"><i class="fas fa-subway mr-2 text-amber-400"></i>Subtes A, H y B</span>
                     <span class="text-[10px] font-black bg-amber-500/20 px-2 py-1 rounded text-amber-300">Cercanos</span>
                 </div>
+                <div class="flex items-center justify-between bg-blue-950/40 p-3 rounded-xl border border-blue-800">
+                    <span class="text-xs font-bold"><i class="fas fa-bicycle mr-2 text-emerald-400"></i>Estación EcoBici</span>
+                    <span class="text-[10px] font-black bg-emerald-500/20 px-2 py-1 rounded text-emerald-300">50 mts</span>
+                </div>
             </div>
         </section>
 
-        <!-- EDUCACIÓN Y SALUD (RESTAURADO) -->
+        <!-- Bloque: Educación y Salud -->
         <section class="glass-card p-5 shadow-sm border-l-4 border-l-red-400">
             <div class="category-header"><i class="fas fa-university"></i> Educación y Salud</div>
             <div class="space-y-3">
@@ -220,7 +283,7 @@
             </div>
         </section>
 
-        <!-- LUGARES E HISTORIA (RESTAURADO) -->
+        <!-- Bloque: Lugares e Historia -->
         <section class="glass-card p-5 shadow-sm border-l-4 border-l-blue-400">
             <div class="category-header"><i class="fas fa-landmark"></i> Lugares e Historia</div>
             <div class="space-y-3">
@@ -228,10 +291,26 @@
                     <span class="location-name"><i class="fas fa-utensils text-slate-400 mr-2"></i>Restaurant El Español</span>
                     <span class="location-dist">Cercano</span>
                 </div>
-                <div class="location-item"><span class="location-name">Congreso de la Nación</span><span class="location-dist">Cercano</span></div>
-                <div class="location-item"><span class="location-name">Mausoleo Rivadavia</span><span class="location-dist">200 mts</span></div>
-                <div class="location-item"><span class="location-name">Parque de la Estación</span><span class="location-dist">60 mts</span></div>
-                <div class="location-item"><span class="location-name">Café de los Angelitos</span><span class="location-dist">500 mts</span></div>
+                <div class="location-item">
+                    <span class="location-name">Congreso de la Nación</span>
+                    <span class="location-dist">Cercano</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-name">Mausoleo Rivadavia (Plaza Miserere)</span>
+                    <span class="location-dist">200 mts</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-name">Memorial Cromañón</span>
+                    <span class="location-dist">200 mts</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-name">Parque de la Estación</span>
+                    <span class="location-dist">60 mts</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-name">Café de los Angelitos</span>
+                    <span class="location-dist">500 mts</span>
+                </div>
             </div>
         </section>
 
@@ -240,95 +319,102 @@
         </footer>
     </main>
 
-    <!-- Modal de Reseña -->
-    <div id="review-modal" class="hidden fixed inset-0 z-[100] bg-slate-900/80 flex items-center justify-center p-6">
-        <div class="bg-white w-full max-w-sm rounded-[2.5rem] p-8">
-            <h2 class="text-blue-900 font-black text-center text-xl uppercase mb-1">¡Te escuchamos!</h2>
-            <form id="review-form" class="space-y-4">
-                <input type="text" id="rev-name" placeholder="Tu Nombre" required class="w-full bg-slate-50 border-none rounded-2xl p-4 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
-                <select id="rev-rating" class="w-full bg-slate-50 border-none rounded-2xl p-4 text-sm font-bold text-blue-900 outline-none">
-                    <option value="5">Excelente ⭐⭐⭐⭐⭐</option>
-                    <option value="4">Muy Bueno ⭐⭐⭐⭐</option>
-                    <option value="3">Bueno ⭐⭐⭐</option>
+    <!-- MODAL DE COMENTARIO -->
+    <div id="modal-overlay" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-sm rounded-[2.5rem] shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+            <div class="bg-blue-900 p-6 text-center">
+                <h3 class="text-amber-400 font-black uppercase text-sm tracking-widest">Nueva Reseña</h3>
+            </div>
+            <form id="review-form" class="p-8 space-y-4">
+                <input type="text" id="rev-name" placeholder="Tu Nombre" required class="w-full bg-slate-50 border-none rounded-xl p-4 text-xs font-bold outline-none focus:ring-2 focus:ring-amber-400">
+                <select id="rev-stars" class="w-full bg-slate-50 border-none rounded-xl p-4 text-xs font-bold outline-none">
+                    <option value="5">⭐⭐⭐⭐⭐ (Excelente)</option>
+                    <option value="4">⭐⭐⭐⭐ (Muy Bueno)</option>
+                    <option value="3">⭐⭐⭐ (Bueno)</option>
                 </select>
-                <textarea id="rev-comment" placeholder="¿Cómo fue tu experiencia?" required class="w-full bg-slate-50 border-none rounded-2xl p-4 text-sm h-32 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
-                <div class="flex gap-2">
-                    <button type="button" id="btn-close-modal" class="flex-1 bg-slate-100 text-slate-500 py-4 rounded-2xl font-black text-[10px] uppercase">Cerrar</button>
-                    <button type="submit" id="btn-submit" class="flex-1 bg-blue-600 text-white py-4 rounded-2xl font-black text-[10px] uppercase">Publicar</button>
+                <textarea id="rev-comment" placeholder="Tu opinión sobre la estadía..." required class="w-full bg-slate-50 border-none rounded-xl p-4 text-xs font-bold h-32 outline-none focus:ring-2 focus:ring-amber-400"></textarea>
+                <div class="grid grid-cols-2 gap-3 pt-2">
+                    <button type="button" onclick="closeReviewModal()" class="bg-slate-100 text-slate-500 py-4 rounded-2xl font-black text-[10px] uppercase">Cerrar</button>
+                    <button type="submit" id="btn-submit" class="bg-blue-600 text-white py-4 rounded-2xl font-black text-[10px] uppercase shadow-lg">Publicar</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Firebase -->
+    <!-- LOGICA FIREBASE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
         const firebaseConfig = JSON.parse(__firebase_config);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'rinconcito-urbano-full';
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'rinconcito-urbano-official';
         
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
 
         const list = document.getElementById('reviews-list');
+        const overlay = document.getElementById('modal-overlay');
+        const form = document.getElementById('review-form');
 
-        document.getElementById('btn-open-review').onclick = () => document.getElementById('review-modal').classList.remove('hidden');
-        document.getElementById('btn-close-modal').onclick = () => document.getElementById('review-modal').classList.add('hidden');
+        // Globales para el modal
+        window.openReviewModal = () => overlay.classList.remove('hidden');
+        window.closeReviewModal = () => overlay.classList.add('hidden');
 
-        onAuthStateChanged(auth, (user) => {
-            if (!user) {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    signInAnonymously(auth);
-                }
-                return;
-            }
+        const init = async () => {
+            try {
+                await signInAnonymously(auth);
+                const colRef = collection(db, 'artifacts', appId, 'public', 'data', 'reviews');
 
-            const path = collection(db, 'artifacts', appId, 'public', 'data', 'reviews');
-            onSnapshot(path, (snap) => {
-                const data = snap.docs.map(doc => doc.data());
-                data.sort((a,b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+                onSnapshot(colRef, (snap) => {
+                    const data = snap.docs.map(d => ({id: d.id, ...d.data()}))
+                        .sort((a,b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
 
-                if (data.length === 0) {
-                    list.innerHTML = `<div class="p-8 text-center text-slate-300 text-[10px] font-bold uppercase tracking-widest">Sin reseñas aún</div>`;
-                    return;
-                }
+                    if(data.length === 0) {
+                        list.innerHTML = `<p class="text-center text-slate-300 text-[10px] py-6 uppercase font-bold italic tracking-wider">Sé el primero en opinar</p>`;
+                        return;
+                    }
 
-                list.innerHTML = data.map(r => `
-                    <div class="review-card">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-black text-[10px] text-blue-900 uppercase">${r.name}</span>
-                            <span class="text-[8px] text-amber-500">${'★'.repeat(r.rating)}</span>
+                    list.innerHTML = data.map(r => `
+                        <div class="review-card">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-[10px] font-black text-blue-900 uppercase">${r.name}</span>
+                                <span class="text-[9px] text-amber-500">${'★'.repeat(r.rating)}</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500 leading-relaxed font-medium italic">"${r.comment}"</p>
                         </div>
-                        <p class="text-[11px] text-slate-600 leading-relaxed">${r.comment}</p>
-                    </div>
-                `).join('');
-            });
-        });
+                    `).join('');
+                }, (err) => {
+                    list.innerHTML = `<p class="text-center text-red-300 text-[10px] py-4">Error al conectar.</p>`;
+                });
+            } catch (e) { console.error(e); }
+        };
 
-        document.getElementById('review-form').onsubmit = async (e) => {
+        form.onsubmit = async (e) => {
             e.preventDefault();
-            if (!auth.currentUser) return;
             const btn = document.getElementById('btn-submit');
             btn.disabled = true;
+            btn.innerText = "ENVIANDO...";
 
             try {
-                const path = collection(db, 'artifacts', appId, 'public', 'data', 'reviews');
-                await addDoc(path, {
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'reviews'), {
                     name: document.getElementById('rev-name').value,
-                    rating: parseInt(document.getElementById('rev-rating').value),
+                    rating: parseInt(document.getElementById('rev-stars').value),
                     comment: document.getElementById('rev-comment').value,
                     createdAt: serverTimestamp()
                 });
-                document.getElementById('review-form').reset();
-                document.getElementById('review-modal').classList.add('hidden');
-            } catch (e) { console.error(e); }
-            btn.disabled = false;
+                form.reset();
+                closeReviewModal();
+            } catch (err) {
+                console.error(err);
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "PUBLICAR";
+            }
         };
+
+        window.onload = init;
     </script>
 </body>
 </html>
