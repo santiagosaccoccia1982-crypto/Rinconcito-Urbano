@@ -9,17 +9,44 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Charm:wght@700&display=swap');
         body { font-family: 'Montserrat', sans-serif; background-color: #f8fafc; }
+        
+        /* Encabezado con más espacio */
         .header-filete {
             background: radial-gradient(circle at center, #1e40af 0%, #172554 100%);
-            height: 30vh;
+            height: 35vh; /* Aumentado de 30 a 35 */
             display: flex;
             align-items: center;
             justify-content: center;
             border-bottom: 6px solid #fbbf24;
             position: relative;
         }
-        .text-balvanera { font-family: 'Charm', cursive; color: #fbbf24; font-size: 3.5rem; text-shadow: 2px 2px 0px #0c1a44; }
-        .brand-ribbon { background: #fbbf24; color: #1e3a8a; padding: 4px 15px; font-weight: 900; font-size: 10px; text-transform: uppercase; border: 2px solid #fff; margin-top: -5px; }
+        
+        .text-balvanera { 
+            font-family: 'Charm', cursive; 
+            color: #fbbf24; 
+            font-size: 3.5rem; 
+            text-shadow: 2px 2px 0px #0c1a44; 
+            margin-bottom: 0.5rem;
+        }
+        
+        .brand-ribbon { 
+            background: #fbbf24; 
+            color: #1e3a8a; 
+            padding: 4px 15px; 
+            font-weight: 900; 
+            font-size: 10px; 
+            text-transform: uppercase; 
+            border: 2px solid #fff; 
+            display: inline-block;
+        }
+
+        /* Contenedor principal con margen corregido */
+        .main-container {
+            margin-top: -2rem; /* Menos agresivo para no tapar el header */
+            position: relative;
+            z-index: 20;
+        }
+
         .glass-card { background: white; border-radius: 1.5rem; border: 1px solid #e2e8f0; margin-bottom: 1rem; overflow: hidden; }
         .category-header { font-size: 0.75rem; font-weight: 900; color: #1e40af; text-transform: uppercase; padding: 1rem 1rem 0.5rem; display: flex; align-items: center; }
         .location-item { display: flex; align-items: center; justify-content: space-between; padding: 0.4rem 1rem; }
@@ -27,6 +54,7 @@
         .location-dist { font-size: 0.65rem; font-weight: 800; color: #1e40af; background: #eff6ff; padding: 2px 6px; border-radius: 4px; }
         .btn-main { border-radius: 1rem; padding: 1rem; font-weight: 800; display: flex; align-items: center; justify-content: space-between; transition: all 0.2s; cursor: pointer; }
         .review-item { padding: 1rem; border-bottom: 1px solid #f1f5f9; }
+        #form-modal { backdrop-filter: blur(4px); }
     </style>
 </head>
 <body class="antialiased">
@@ -38,14 +66,17 @@
         </div>
     </header>
 
-    <main class="max-w-md mx-auto px-4 -mt-6 relative z-20 space-y-4 pb-10">
+    <main class="max-w-md mx-auto px-4 main-container space-y-4 pb-10">
         
-        <!-- Botones de Acción -->
-        <div class="space-y-2">
-            <a href="https://wa.me/5492914046014" target="_blank" class="btn-main bg-emerald-600 text-white shadow-lg">
+        <!-- Botones de Acción - Ahora con margen superior interno para no tocar el ribbon -->
+        <div class="pt-4 space-y-2">
+            <a href="https://wa.me/5492914046014" target="_blank" class="btn-main bg-emerald-600 text-white shadow-xl hover:bg-emerald-700 active:scale-95 transition-all">
                 <div class="flex items-center">
                     <i class="fab fa-whatsapp text-xl mr-3"></i>
-                    <span class="text-sm">Consultar Santiago (Dueño)</span>
+                    <div>
+                        <p class="text-sm">Consultar Santiago (Dueño)</p>
+                        <p class="text-[9px] opacity-70 font-bold uppercase">Respuesta inmediata</p>
+                    </div>
                 </div>
                 <i class="fas fa-chevron-right text-xs opacity-50"></i>
             </a>
@@ -118,8 +149,8 @@
     </main>
 
     <!-- Modal Formulario -->
-    <div id="form-modal" class="hidden fixed inset-0 bg-black/80 z-[100] flex items-center justify-center p-6 text-slate-800">
-        <div class="bg-white w-full max-w-sm rounded-2xl p-6 shadow-2xl">
+    <div id="form-modal" class="hidden fixed inset-0 bg-black/60 z-[100] flex items-center justify-center p-6 text-slate-800">
+        <div class="bg-white w-full max-w-sm rounded-2xl p-6 shadow-2xl scale-in">
             <h2 class="text-blue-900 font-bold mb-4 text-center">Dejar una Reseña</h2>
             <form id="review-form" class="space-y-4">
                 <input type="text" id="rev-name" placeholder="Tu Nombre" required class="w-full p-3 bg-slate-100 rounded-xl text-sm border-none focus:ring-2 focus:ring-blue-500 outline-none">
@@ -142,6 +173,7 @@
         import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
+        // CONFIGURACIÓN Y SERVICIOS
         const firebaseConfig = JSON.parse(__firebase_config);
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'rinconcito-urbano-v1';
         
@@ -149,15 +181,28 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
+        // UI ELEMENTS
         const modal = document.getElementById('form-modal');
         const container = document.getElementById('reviews-container');
         const openBtn = document.getElementById('open-modal-btn');
         const closeBtn = document.getElementById('close-modal-btn');
+        const reviewForm = document.getElementById('review-form');
 
-        openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
-        closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+        // GESTIÓN DE MODAL
+        openBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
 
-        async function initApp() {
+        closeBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.add('hidden');
+        });
+
+        // AUTENTICACIÓN
+        async function initAuth() {
             try {
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
                     await signInWithCustomToken(auth, __initial_auth_token);
@@ -170,6 +215,7 @@
             }
         }
 
+        // ESCUCHA DE DATOS
         onAuthStateChanged(auth, (user) => {
             if (!user) return;
             const colRef = collection(db, 'artifacts', appId, 'public', 'data', 'reviews');
@@ -192,16 +238,21 @@
                     `).join('');
                 }
             }, (error) => {
-                container.innerHTML = `<p class="p-6 text-center text-[10px] text-slate-400 font-bold uppercase">Las reseñas aparecerán pronto</p>`;
+                console.error("Snapshot error:", error);
+                container.innerHTML = `<p class="p-6 text-center text-[10px] text-slate-400 font-bold uppercase italic">Las reseñas se cargarán pronto...</p>`;
             });
         });
 
-        document.getElementById('review-form').onsubmit = async (e) => {
+        // ENVÍO DE FORMULARIO
+        reviewForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             if (!auth.currentUser) return;
+            
             const btn = document.getElementById('submit-btn');
+            const originalText = btn.innerText;
             btn.disabled = true;
-            btn.innerText = "...";
+            btn.innerText = "ESPERE...";
+
             try {
                 await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'reviews'), {
                     name: document.getElementById('rev-name').value,
@@ -210,12 +261,16 @@
                     createdAt: serverTimestamp()
                 });
                 modal.classList.add('hidden');
-                document.getElementById('review-form').reset();
-            } catch (err) { console.error(err); } 
-            finally { btn.disabled = false; btn.innerText = "PUBLICAR"; }
-        };
+                reviewForm.reset();
+            } catch (err) { 
+                console.error("Error al publicar:", err);
+            } finally { 
+                btn.disabled = false; 
+                btn.innerText = originalText; 
+            }
+        });
 
-        initApp();
+        initAuth();
     </script>
 </body>
 </html>
